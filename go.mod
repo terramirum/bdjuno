@@ -18,15 +18,17 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	github.com/tendermint/tendermint v0.35.9
-	github.com/terramirum/mirumd v0.0.8
+	github.com/terramirum/mirumd v0.0.9
 	google.golang.org/grpc v1.55.0
 	gopkg.in/yaml.v3 v3.0.1
 )
 
 require (
 	cosmossdk.io/tools/rosetta v0.2.1 // indirect
+	github.com/btcsuite/btcd v0.22.1 // indirect
 	github.com/cosmos/ibc-go/v7 v7.0.1 // indirect
 	github.com/google/gofuzz v1.2.0 // indirect
+	github.com/oasisprotocol/curve25519-voi v0.0.0-20210609091139-0a56a4bca00b // indirect
 )
 
 require (

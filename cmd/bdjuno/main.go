@@ -8,6 +8,7 @@ import (
 	parsetypes "github.com/forbole/juno/v5/cmd/parse/types"
 	startcmd "github.com/forbole/juno/v5/cmd/start"
 	"github.com/forbole/juno/v5/modules/messages"
+	"github.com/terramirum/mirumd/x/rental"
 
 	migratecmd "github.com/forbole/bdjuno/v5/cmd/migrate"
 	parsecmd "github.com/forbole/bdjuno/v5/cmd/parse"
@@ -57,6 +58,7 @@ func getBasicManagers() []module.BasicManager {
 	return []module.BasicManager{
 		simapp.ModuleBasics,
 		module.NewBasicManager(wasm.AppModuleBasic{}),
+		module.NewBasicManager(rental.AppModuleBasic{}),
 	}
 }
 
