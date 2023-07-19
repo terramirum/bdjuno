@@ -1423,8 +1423,8 @@ github.com/tendermint/tendermint v0.35.9/go.mod h1:FYvzUDkmVv1awfFl9V85yl5NKyjxz
 github.com/tendermint/tm-db v0.6.6/go.mod h1:wP8d49A85B7/erz/r4YbKssKw6ylsO/hKtFk7E1aWZI=
 github.com/tenntenn/modver v1.0.1/go.mod h1:bePIyQPb7UeioSRkw3Q0XeMhYZSMx9B8ePqg6SAMGH0=
 github.com/tenntenn/text/transform v0.0.0-20200319021203-7eef512accb3/go.mod h1:ON8b8w4BN/kE1EOhwT0o+d62W65a6aPw1nouo9LMgyY=
-github.com/terramirum/mirumd v0.0.9 h1:csDLJhyAXyqmKXncKRojtNfh0K7yfi/YvaBX/CUHN6o=
-github.com/terramirum/mirumd v0.0.9/go.mod h1:XXnEua0wLIJ+BVOlNb8IQHoYOBxwy2RyLOBerd5B214=
+github.com/terramirum/mirumd v0.0.10 h1:6RLmsEBdxrErdpQPbhkbwRRWWRIeUHcHBi1BsUZiTMc=
+github.com/terramirum/mirumd v0.0.10/go.mod h1:XXnEua0wLIJ+BVOlNb8IQHoYOBxwy2RyLOBerd5B214=
 github.com/tetafro/godot v1.4.11/go.mod h1:LR3CJpxDVGlYOWn3ZZg1PgNZdTUvzsZWu8xaEohUpn8=
 github.com/tidwall/btree v1.6.0 h1:LDZfKfQIBHGHWSwckhXI0RPSXzlo+KYdjK7FWSqOzzg=
 github.com/tidwall/btree v1.6.0/go.mod h1:twD9XRA5jj9VUQGELzDO4HPQTNJsoWWfYEL+EUQ2cKY=

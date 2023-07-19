@@ -18,7 +18,7 @@ require (
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
 	github.com/tendermint/tendermint v0.35.9
-	github.com/terramirum/mirumd v0.0.9
+	github.com/terramirum/mirumd v0.0.10
 	google.golang.org/grpc v1.55.0
 	gopkg.in/yaml.v3 v3.0.1
 )
