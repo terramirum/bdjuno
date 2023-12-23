@@ -32,5 +32,5 @@ func NewModule(source wasmsource.Source, cdc codec.Codec, db *database.Db) *Modu
 
 // Name implements modules.Module
 func (m *Module) Name() string {
-	return "wasm"
+	return "cosmwasm"
 }

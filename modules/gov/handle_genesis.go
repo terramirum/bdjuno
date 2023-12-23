@@ -17,9 +17,27 @@ import (
 func (m *Module) HandleGenesis(doc *tmtypes.GenesisDoc, appState map[string]json.RawMessage) error {
 	log.Debug().Str("module", "gov").Msg("parsing genesis")
 
+	jsonData := appState[gov.ModuleName]
+
+	// Unmarshal JSON data into a map
+	var dataMap map[string]interface{}
+	err := json.Unmarshal([]byte(jsonData), &dataMap)
+	if err != nil {
+		return err
+	}
+
+	// Remove the "params" field from the map
+	delete(dataMap, "params")
+
+	// Marshal the modified map back into JSON data
+	govModuleGenesis, err := json.Marshal(dataMap)
+	if err != nil {
+		return err
+	}
+
 	// Read the genesis state
 	var genStatev1beta1 govtypesv1beta1.GenesisState
-	err := m.cdc.UnmarshalJSON(appState[gov.ModuleName], &genStatev1beta1)
+	err = m.cdc.UnmarshalJSON(govModuleGenesis, &genStatev1beta1)
 	if err != nil {
 		return fmt.Errorf("error while reading gov genesis data: %s", err)
 	}
