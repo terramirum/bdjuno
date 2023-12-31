@@ -40,14 +40,15 @@ func proposalCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {
 				return err
 			}
 
-			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig)
-			if err != nil {
-				return err
-			}
 
 			// Get the database
 			db := database.Cast(parseCtx.Database)
 
+			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig, db)
+			if err != nil {
+				return err
+			}
+			
 			// Build expected modules of gov modules for handleParamChangeProposal
 			distrModule := distribution.NewModule(sources.DistrSource, parseCtx.EncodingConfig.Codec, db)
 			mintModule := mint.NewModule(sources.MintSource, parseCtx.EncodingConfig.Codec, db)

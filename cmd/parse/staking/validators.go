@@ -24,14 +24,15 @@ func validatorsCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {
 				return err
 			}
 
-			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig)
-			if err != nil {
-				return err
-			}
 
 			// Get the database
 			db := database.Cast(parseCtx.Database)
 
+			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig, db)
+			if err != nil {
+				return err
+			}
+			
 			// Build the staking module
 			stakingModule := staking.NewModule(sources.StakingSource, parseCtx.EncodingConfig.Codec, db)
 

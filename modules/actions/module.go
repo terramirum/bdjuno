@@ -8,6 +8,7 @@ import (
 	nodeconfig "github.com/forbole/juno/v5/node/config"
 	"github.com/forbole/juno/v5/types/config"
 
+	"github.com/forbole/bdjuno/v5/database"
 	modulestypes "github.com/forbole/bdjuno/v5/modules/types"
 )
 
@@ -26,7 +27,7 @@ type Module struct {
 	sources *modulestypes.Sources
 }
 
-func NewModule(cfg config.Config, encodingConfig *params.EncodingConfig) *Module {
+func NewModule(cfg config.Config, encodingConfig *params.EncodingConfig, db *database.Db) *Module {
 	bz, err := cfg.GetBytes()
 	if err != nil {
 		panic(err)
@@ -49,7 +50,7 @@ func NewModule(cfg config.Config, encodingConfig *params.EncodingConfig) *Module
 	}
 
 	// Build the sources
-	sources, err := modulestypes.BuildSources(nodeCfg, encodingConfig)
+	sources, err := modulestypes.BuildSources(nodeCfg, encodingConfig, db)
 	if err != nil {
 		panic(err)
 	}

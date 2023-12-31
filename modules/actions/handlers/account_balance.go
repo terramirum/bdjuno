@@ -23,7 +23,16 @@ func AccountBalanceHandler(ctx *types.Context, payload *types.Payload) (interfac
 		return nil, fmt.Errorf("error while getting account balance: %s", err)
 	}
 
+	wasmBalance, err := ctx.Sources.WasmSource.GetAccountBalance(payload.GetAddress(), height)
+	if err != nil {
+		return nil, fmt.Errorf("error while getting account contract balance: %s", err)
+	}
+
+	coins := types.ConvertCoins(balance)
+	wasmCoins := types.ConvertCoins(wasmBalance)
+	coins = append(coins, wasmCoins...)
+
 	return types.Balance{
-		Coins: types.ConvertCoins(balance),
+		Coins: coins,
 	}, nil
 }

@@ -63,6 +63,7 @@ type WasmContractRow struct {
 	Height                int64     `db:"height"`
 }
 
+
 // NewWasmContractRow allows to easily create a new WasmContractRow
 func NewWasmContractRow(
 	sender string,

@@ -23,6 +23,7 @@ import (
 	stakingtypes "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/forbole/juno/v5/node/local"
 
+	database "github.com/forbole/bdjuno/v5/database"
 	nodeconfig "github.com/forbole/juno/v5/node/config"
 
 	banksource "github.com/forbole/bdjuno/v5/modules/bank/source"
@@ -59,10 +60,10 @@ type Sources struct {
 	WasmSource     wasmsource.Source
 }
 
-func BuildSources(nodeCfg nodeconfig.Config, encodingConfig *params.EncodingConfig) (*Sources, error) {
+func BuildSources(nodeCfg nodeconfig.Config, encodingConfig *params.EncodingConfig, db *database.Db) (*Sources, error) {
 	switch cfg := nodeCfg.Details.(type) {
 	case *remote.Details:
-		return buildRemoteSources(cfg)
+		return buildRemoteSources(cfg, db)
 	case *local.Details:
 		return buildLocalSources(cfg, encodingConfig)
 
@@ -117,7 +118,7 @@ func buildLocalSources(cfg *local.Details, encodingConfig *params.EncodingConfig
 	return sources, nil
 }
 
-func buildRemoteSources(cfg *remote.Details) (*Sources, error) {
+func buildRemoteSources(cfg *remote.Details, db *database.Db) (*Sources, error) {
 	source, err := remote.NewSource(cfg.GRPC)
 	if err != nil {
 		return nil, fmt.Errorf("error while creating remote source: %s", err)
@@ -130,6 +131,6 @@ func buildRemoteSources(cfg *remote.Details) (*Sources, error) {
 		MintSource:     remotemintsource.NewSource(source, minttypes.NewQueryClient(source.GrpcConn)),
 		SlashingSource: remoteslashingsource.NewSource(source, slashingtypes.NewQueryClient(source.GrpcConn)),
 		StakingSource:  remotestakingsource.NewSource(source, stakingtypes.NewQueryClient(source.GrpcConn)),
-		WasmSource:     remotewasmsource.NewSource(source, wasmtypes.NewQueryClient(source.GrpcConn)),
+		WasmSource:     remotewasmsource.NewSource(source, wasmtypes.NewQueryClient(source.GrpcConn), db),
 	}, nil
 }

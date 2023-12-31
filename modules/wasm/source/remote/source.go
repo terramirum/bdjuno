@@ -7,6 +7,7 @@ import (
 	"github.com/cosmos/cosmos-sdk/types/query"
 	"github.com/forbole/juno/v5/node/remote"
 
+	"github.com/forbole/bdjuno/v5/database"
 	wasmsource "github.com/forbole/bdjuno/v5/modules/wasm/source"
 )
 
@@ -18,13 +19,15 @@ var (
 type Source struct {
 	*remote.Source
 	wasmClient wasmtypes.QueryClient
+	db         *database.Db
 }
 
 // NewSource returns a new Source instance
-func NewSource(source *remote.Source, wasmClient wasmtypes.QueryClient) *Source {
+func NewSource(source *remote.Source, wasmClient wasmtypes.QueryClient, db *database.Db) *Source {
 	return &Source{
 		Source:     source,
 		wasmClient: wasmClient,
+		db:         db,
 	}
 }
 

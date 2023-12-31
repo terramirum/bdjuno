@@ -17,7 +17,9 @@ type Coin struct {
 func ConvertCoins(coins sdk.Coins) []Coin {
 	amount := make([]Coin, 0)
 	for _, coin := range coins {
-		amount = append(amount, Coin{Amount: coin.Amount.String(), Denom: coin.Denom})
+		if coin.Amount.Int64() > 0 {
+			amount = append(amount, Coin{Amount: coin.Amount.String(), Denom: coin.Denom})
+		}
 	}
 	return amount
 }

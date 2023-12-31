@@ -23,14 +23,15 @@ func inflationCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {
 				return err
 			}
 
-			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig)
-			if err != nil {
-				return err
-			}
 
 			// Get the database
 			db := database.Cast(parseCtx.Database)
 
+			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig, db)
+			if err != nil {
+				return err
+			}
+			
 			// Build mint module
 			mintModule := mint.NewModule(sources.MintSource, parseCtx.EncodingConfig.Codec, db)
 

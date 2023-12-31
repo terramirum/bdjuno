@@ -23,13 +23,15 @@ func poolCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {
 				return err
 			}
 
-			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig)
+			
+			// Get the database
+			db := database.Cast(parseCtx.Database)
+
+			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig, db)
 			if err != nil {
 				return err
 			}
 
-			// Get the database
-			db := database.Cast(parseCtx.Database)
 
 			// Build staking module
 			stakingModule := staking.NewModule(sources.StakingSource, parseCtx.EncodingConfig.Codec, db)

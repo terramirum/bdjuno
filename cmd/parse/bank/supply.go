@@ -24,13 +24,14 @@ func supplyCmd(parseConfig *parsecmdtypes.Config) *cobra.Command {
 				return err
 			}
 
-			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig)
-			if err != nil {
-				return err
-			}
 
 			// Get the database
 			db := database.Cast(parseCtx.Database)
+
+			sources, err := modulestypes.BuildSources(config.Cfg.Node, parseCtx.EncodingConfig, db)
+			if err != nil {
+				return err
+			}
 
 			// Build bank module
 			bankModule := bank.NewModule(nil, sources.BankSource, parseCtx.EncodingConfig.Codec, db)

@@ -71,12 +71,12 @@ func (r *Registrar) BuildModules(ctx registrar.Context) jmodules.Modules {
 	cdc := ctx.EncodingConfig.Codec
 	db := database.Cast(ctx.Database)
 
-	sources, err := types.BuildSources(ctx.JunoConfig.Node, ctx.EncodingConfig)
+	sources, err := types.BuildSources(ctx.JunoConfig.Node, ctx.EncodingConfig, db)
 	if err != nil {
 		panic(err)
 	}
 
-	actionsModule := actions.NewModule(ctx.JunoConfig, ctx.EncodingConfig)
+	actionsModule := actions.NewModule(ctx.JunoConfig, ctx.EncodingConfig, db)
 	authModule := auth.NewModule(r.parser, cdc, db)
 	bankModule := bank.NewModule(r.parser, sources.BankSource, cdc, db)
 	consensusModule := consensus.NewModule(db)

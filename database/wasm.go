@@ -260,3 +260,28 @@ sender = $1, admin = $2 WHERE contract_address = $3 `
 	}
 	return nil
 }
+
+// GetWasmTokens retrieves wasm contract information from the database
+func (db *Db) GetWasmTokens() (wasmContractInfo []types.WasmContractInfo, err error) {
+	stmt := `SELECT contract_address, contract_states FROM wasm_contract`
+
+	rows, err := db.SQL.Query(stmt)
+	if err != nil {
+		return nil, fmt.Errorf("error querying wasm contracts: %s", err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var contractInfo types.WasmContractInfo
+		if err := rows.Scan(&contractInfo.ContractAddress, &contractInfo.ContractStates); err != nil {
+			return nil, fmt.Errorf("error scanning wasm contract row: %s", err)
+		}
+		wasmContractInfo = append(wasmContractInfo, contractInfo)
+	}
+
+	if err := rows.Err(); err != nil {
+		return nil, fmt.Errorf("error iterating over wasm contract rows: %s", err)
+	}
+
+	return wasmContractInfo, nil
+}

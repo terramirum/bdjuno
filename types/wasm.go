@@ -34,6 +34,11 @@ type WasmCode struct {
 	Height                int64
 }
 
+type WasmContractInfo struct {
+	ContractAddress string
+	ContractStates  string
+}
+
 // NewWasmCode allows to build a new x/wasm code instance
 func NewWasmCode(
 	sender string, wasmByteCode []byte, iPermission *wasmtypes.AccessConfig, codeID uint64, height int64,
